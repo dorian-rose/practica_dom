@@ -35,12 +35,12 @@ section {
   margin: var(--gap);
 }
 
-article {
-  border: 1px solid var(--medium);
+article.card {
+  box-shadow: 1px 1px 5px var(--medium);
 }
-article > h3,
+.card h3,
 p {
-  margin: 10px;
+  margin: 12px;
 }
 
 select {

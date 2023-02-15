@@ -14,45 +14,15 @@
     <main>
       <section>
         <h2>Bienvenidos</h2>
-        <div><img src="banner/1.jpg" alt="" /></div>
+
+        <div class="banner-container"></div>
       </section>
-      <section>
+      <section class="recommendations">
         <h2>Recomendados</h2>
-        <div class="grid-container three">
-          <article class="card">
-            <div>
-              <img src="viajes/viajes-1.jpg" alt="" />
-            </div>
-            <h3>Viaje 1</h3>
-            <p>
-              De forma predeterminada, un contenedor tiene un elemento de
-              cuadrícula para cada columna, en cada fila, pero puede diseñar los
-              elementos de cuadrícula para que abarquen varias columnas o filas.
-            </p>
-          </article>
-          <article class="card">
-            <div>
-              <img src="viajes/viajes-2.jpg" alt="" />
-            </div>
-            <h3>Viaje 2</h3>
-            <p>
-              De forma predeterminada, un contenedor tiene un elemento de
-              cuadrícula para cada columna, en cada fila, pero puede diseñar los
-              elementos de cuadrícula para que abarquen varias columnas o filas.
-            </p>
-          </article>
-          <article class="card">
-            <div>
-              <img src="viajes/viajes-3.jpg" alt="" />
-            </div>
-            <h3>Viaje 3</h3>
-            <p>
-              De forma predeterminada, un contenedor tiene un elemento de
-              cuadrícula para cada columna, en cada fila, pero puede diseñar los
-              elementos de cuadrícula para que abarquen varias columnas o filas.
-            </p>
-          </article>
-        </div>
+        <div class="grid-container three viajes"></div>
+        <!--javascript dyanamic structure here: a .card-container article, inside
+        a this a div, .card-header, a h3 and a p. The card-header has an image
+        within it.-->
       </section>
       <section>
         <h2>Destinos</h2>
@@ -64,5 +34,6 @@
         </select>
       </section>
     </main>
+    <script src="mains.js"></script>
   </body>
 </html>
