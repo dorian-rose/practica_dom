@@ -1,7 +1,8 @@
 let num = 3;
 let bannerContainer = document.querySelector(".banner-container");
 let viajes = document.querySelector(".viajes");
-console.log(viajes);
+let select = document.querySelector("select");
+let fragment = document.createDocumentFragment();
 
 //randomly select one of eight banner images
 function makeBannerImage() {
@@ -17,7 +18,6 @@ function makeBannerImage() {
   ];
 
   let num = Math.floor(Math.random() * bannerImages.length);
-  console.log(num);
   let bannerImg = document.createElement("IMG");
   bannerImg.alt = bannerImages[num][1];
   bannerImg.src = `banner/${bannerImages[num][0]}`;
@@ -26,7 +26,7 @@ function makeBannerImage() {
 }
 
 //make a card container (article.card) and append it to container (div.viajes)
-//arrray of images included here
+//and make the card header (div) and the image it contains
 function makeCard() {
   const travelImages = [
     ["viajes-1.jpg", "hammock on the beach"],
@@ -42,21 +42,18 @@ function makeCard() {
     let travelNum = Math.floor(Math.random() * travelImages.length);
     let cardContainer = document.createElement("ARTICLE");
     cardContainer.classList.add("card");
-    viajes.append(cardContainer);
-    makeCardHeader(cardContainer, travelNum, travelImages);
+    let cardHeader = document.createElement("DIV");
+    cardContainer.append(cardHeader);
+    let cardImg = document.createElement("IMG");
+    cardImg.alt = travelImages[travelNum][1];
+    cardImg.src = `viajes/${travelImages[travelNum][0]}`;
+    cardImg.title = travelImages[travelNum][1];
+    cardHeader.append(cardImg);
+    fragment.append(cardContainer);
+
     makeCardContent(cardContainer, travelNum);
   });
-}
-
-//Make the card header (div) and the image it contains
-function makeCardHeader(cardContainer, travelNum, travelImages) {
-  let cardHeader = document.createElement("DIV");
-  cardContainer.append(cardHeader);
-  let cardImg = document.createElement("IMG");
-  cardImg.alt = travelImages[travelNum][1];
-  cardImg.src = `viajes/${travelImages[travelNum][0]}`;
-  cardImg.title = travelImages[travelNum][1];
-  cardHeader.append(cardImg);
+  viajes.append(fragment);
 }
 
 //Append a h3 and a p to the card container
@@ -101,5 +98,30 @@ function makeCardContent(cardContainer, travelNum) {
   cardBody.append(cardPara);
 }
 
+function makeSelect() {
+  let destinations = [
+    "Seville",
+    "Barcelona",
+    "Mallorca",
+    "Las Palmas",
+    "Madrid",
+    "Burgos",
+    "Caceres",
+    "Ubeda",
+  ];
+
+  let numberDisplayedOptions = [1, 2, 3];
+
+  numberDisplayedOptions.forEach((element) => {
+    let optNum = Math.floor(Math.random() * destinations.length);
+    let option = document.createElement("OPTION");
+    option.value = destinations[optNum].toLowerCase();
+    option.textContent = destinations[optNum];
+    fragment.append(option);
+  });
+  select.append(fragment);
+}
+
 makeBannerImage();
 makeCard();
+makeSelect();
