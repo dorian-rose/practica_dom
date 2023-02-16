@@ -1,11 +1,15 @@
-let num = 3;
-let bannerContainer = document.querySelector(".banner-container");
-let viajes = document.querySelector(".viajes");
-let select = document.querySelector("select");
-let fragment = document.createDocumentFragment();
+document.addEventListener("DOMContentLoaded", () => {
+  //document site variables
+  const bannerContainer = document.querySelector(".banner-container");
+  const viajes = document.querySelector(".viajes");
+  const select = document.querySelector("select");
+  let fragment = document.createDocumentFragment();
 
-//randomly select one of eight banner images
-function makeBannerImage() {
+  //arrays for foreaches
+  let numberDisplayedOptions = [1, 2, 3];
+  let cards = ["cardOne", "cardTwo", "cardThree"];
+
+  //arrays for content
   const bannerImages = [
     ["1.jpg", "sunset"],
     ["2.jpg", "hot air balloons"],
@@ -16,18 +20,6 @@ function makeBannerImage() {
     ["7.jpg", "birds at sunset"],
     ["8.jpg", "cottontail plant"],
   ];
-
-  let num = Math.floor(Math.random() * bannerImages.length);
-  let bannerImg = document.createElement("IMG");
-  bannerImg.alt = bannerImages[num][1];
-  bannerImg.src = `banner/${bannerImages[num][0]}`;
-  bannerImg.title = bannerImages[num][1];
-  bannerContainer.append(bannerImg);
-}
-
-//make a card container (article.card) and append it to container (div.viajes)
-//and make the card header (div) and the image it contains
-function makeCard() {
   const travelImages = [
     ["viajes-1.jpg", "hammock on the beach"],
     ["viajes-2.jpg", "beach huts"],
@@ -37,27 +29,6 @@ function makeCard() {
     ["viajes-6.jpg", "seaside road"],
     ["viajes-7.jpg", "Granada"],
   ];
-  let cards = ["cardOne", "cardTwo", "cardThree"];
-  cards.forEach((element) => {
-    let travelNum = Math.floor(Math.random() * travelImages.length);
-    let cardContainer = document.createElement("ARTICLE");
-    cardContainer.classList.add("card");
-    let cardHeader = document.createElement("DIV");
-    cardContainer.append(cardHeader);
-    let cardImg = document.createElement("IMG");
-    cardImg.alt = travelImages[travelNum][1];
-    cardImg.src = `viajes/${travelImages[travelNum][0]}`;
-    cardImg.title = travelImages[travelNum][1];
-    cardHeader.append(cardImg);
-    fragment.append(cardContainer);
-
-    makeCardContent(cardContainer, travelNum);
-  });
-  viajes.append(fragment);
-}
-
-//Append a h3 and a p to the card container
-function makeCardContent(cardContainer, travelNum) {
   const travelContent = [
     [
       "Viaje 1",
@@ -88,31 +59,64 @@ function makeCardContent(cardContainer, travelNum) {
       "Et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
     ],
   ];
-  let cardBody = document.createElement("DIV");
-  cardContainer.append(cardBody);
-  let cardTitle = document.createElement("h3");
-  cardTitle.textContent = travelContent[travelNum][0];
-  cardBody.append(cardTitle);
-  let cardPara = document.createElement("p");
-  cardPara.textContent = travelContent[travelNum][1];
-  cardBody.append(cardPara);
-}
 
-function makeSelect() {
-  let destinations = [
-    "Seville",
-    "Barcelona",
-    "Mallorca",
-    "Las Palmas",
-    "Madrid",
-    "Burgos",
-    "Caceres",
-    "Ubeda",
-  ];
+  //=======
+  //functions
+  //======
 
-  let numberDisplayedOptions = [1, 2, 3];
+  //randomly select one of eight banner images and paint it in banner
+  function makeBannerImage() {
+    let num = Math.floor(Math.random() * bannerImages.length);
+    let bannerImg = document.createElement("IMG");
+    bannerImg.alt = bannerImages[num][1];
+    bannerImg.src = `banner/${bannerImages[num][0]}`;
+    bannerImg.title = bannerImages[num][1];
+    bannerContainer.append(bannerImg);
+  }
 
-  numberDisplayedOptions.forEach((element) => {
+  //make a card container (article.card) and append it to container (div.viajes)
+  //and make the card header (div) and the image it contains
+  function makeCard() {
+    //let travelNum = [];
+    for (let i = 0; i < cards.length; i++) {
+      let travelNum = Math.floor(Math.random() * travelImages.length);
+      //do {
+      // travelNum.push(Math.floor(Math.random() * travelImages.length));
+      // } while (travelNum[i] == travelNum[i - 1]);
+      //create card container and add a class to it
+      const cardContainer = document.createElement("ARTICLE");
+      cardContainer.classList.add("card");
+      //create image, alt, src and title, attach to card container
+      const cardImg = document.createElement("IMG");
+      cardImg.alt = travelImages[travelNum][1];
+      cardImg.src = `viajes/${travelImages[travelNum][0]}`;
+      cardImg.title = travelImages[travelNum][1];
+      //create a h3 and text content for it, and attach to card body div
+      const cardTitle = document.createElement("h3");
+      cardTitle.textContent = travelContent[travelNum][0];
+      //create a para, text content for it, and attach to card body
+      const cardPara = document.createElement("p");
+      cardPara.textContent = travelContent[travelNum][1];
+      cardContainer.append(cardImg, cardTitle, cardPara);
+      //store (attache) card container to fragment
+      fragment.append(cardContainer);
+    }
+    viajes.append(fragment);
+  }
+
+  function makeSelect() {
+    let destinations = [
+      "Seville",
+      "Barcelona",
+      "Mallorca",
+      "Las Palmas",
+      "Madrid",
+      "Burgos",
+      "Caceres",
+      "Ubeda",
+    ];
+
+    /*numberDisplayedOptions.forEach((element) => {
     let optNum = Math.floor(Math.random() * destinations.length);
     let option = document.createElement("OPTION");
     option.value = destinations[optNum].toLowerCase();
@@ -120,8 +124,23 @@ function makeSelect() {
     fragment.append(option);
   });
   select.append(fragment);
-}
+}*/
+    let optNum = [];
+    numberDisplayedOptions.forEach((item, i) => {
+      //let optNum = Math.floor(Math.random() * destinations.length);
+      do {
+        optNum.push(Math.floor(Math.random() * destinations.length));
+      } while (optNum[i] == optNum[i - 1]);
+      let option = document.createElement("OPTION");
+      option.value = destinations[optNum[i]].toLowerCase();
+      option.textContent = destinations[optNum[i]];
+      fragment.append(option);
+    });
 
-makeBannerImage();
-makeCard();
-makeSelect();
+    select.append(fragment);
+  }
+
+  makeBannerImage();
+  makeCard();
+  makeSelect();
+});
