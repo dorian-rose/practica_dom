@@ -49,6 +49,26 @@ p {
 select {
   width: 100%;
 }
+
+.appear {
+  display: none;
+  width: 70vw;
+  height: 46vw;
+  position: fixed;
+  top: 50vh;
+  left: 15vw;
+  margin-top: -23vw;
+}
+
+.appear img {
+  box-shadow: 1px 1px 5px var(--medium);
+}
+.appear a {
+  display: block;
+  font-size: 10px;
+  text-align: end;
+  color: var(--dark);
+}
 /*styles*/
 .text-centre {
   text-align: center;
