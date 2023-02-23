@@ -4,6 +4,7 @@ const viajes = document.querySelector(".viajes");
 const select = document.querySelector("select");
 const fragment = document.createDocumentFragment();
 const appear = document.querySelector(".appear");
+const close = document.querySelector(".close");
 
 //arrays for banner image and alt/title
 const bannerImages = [
@@ -61,6 +62,8 @@ const travelImages = [
     para: "Et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
   },
 ];
+//event listener:
+close.addEventListener("click", () => disappearImage());
 
 //=======
 //functions
@@ -80,15 +83,16 @@ function makeBannerImage() {
 //and make the card header (div) and the image it contains
 function makeCard() {
   let numberOfCards = ["cardOne", "cardTwo", "cardThree"];
-  //let travelNum = [];
-  //numberOfCards.forEach((item, i) => {
-  //   do {
-  //     travelNum.push(Math.floor(Math.random() * travelImages.length));
-  //   } while (travelNum[i] == travelNum[i - 1]);
-  // });
-
+  let allTravelNums = [];
   numberOfCards.forEach((item, i) => {
-    let travelNum = Math.floor(Math.random() * travelImages.length);
+    let travelNum;
+    do {
+      travelNum = Math.floor(Math.random() * travelImages.length);
+    } while (
+      travelNum == allTravelNums[i - 1] ||
+      travelNum == allTravelNums[i - 2]
+    );
+    allTravelNums.push(travelNum);
 
     //create card container and add a class to it
     const cardContainer = document.createElement("ARTICLE");
@@ -150,15 +154,20 @@ function makeSelect() {
   select.append(fragment);
 }
 
+//make image pop up
+function showImage(event) {
+  appear.style.display = "block";
+  let appearImage = document.querySelector(".appear img");
+  appearImage.src = event.target.src;
+}
+
+function disappearImage(event) {
+  appear.style.display = "none";
+}
+
 // start: call functions on document load
 document.addEventListener("DOMContentLoaded", () => {
   makeBannerImage();
   makeCard();
   makeSelect();
 });
-
-function showImage(event) {
-  appear.style.display = "block";
-  let appearImage = document.querySelector(".appear img");
-  appearImage.src = event.target.src;
-}

@@ -41,6 +41,11 @@ section {
 article.card {
   box-shadow: 1px 1px 5px var(--medium);
 }
+
+section.recommendations {
+  margin: 0 40px;
+}
+
 .card h3,
 p {
   margin: 12px;
@@ -63,12 +68,7 @@ select {
 .appear img {
   box-shadow: 1px 1px 5px var(--medium);
 }
-.appear a {
-  display: block;
-  font-size: 10px;
-  text-align: end;
-  color: var(--dark);
-}
+
 /*styles*/
 .text-centre {
   text-align: center;
@@ -92,6 +92,9 @@ footer a {
 768 px
 ===============================*/
 @media screen and (min-width: 768px) {
+  section.recommendations {
+    margin: 0 70px;
+  }
 }
 /*============================
 992 px
@@ -99,6 +102,9 @@ footer a {
 @media screen and (min-width: 992px) {
   .three {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  section.recommendations {
+    margin: var(--gap);
   }
 }
 
